@@ -21,9 +21,9 @@ Date-a-Base is a virtual community where everyone can find and share advices abo
 Launch on GitHub Pages. Check out the GitHub Repo.
 
 ## Project Brief
-​
+
 ### The brief requirements were:
-​
+
 * **Build a full-stack application** by making your own backend and your own front-end
 * **Use an Express API** to serve your data from a Mongo database
 * **Consume your API with a separate front-end** built with React
