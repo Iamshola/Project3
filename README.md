@@ -9,7 +9,7 @@
 * Run `yarn init` in the CLI
 * Run `mongod`, `yarn seed`, `yarn serve:backend` and `yarn serve:frontend` in the CLI
 
-# Team
+### Team
 - Daniele Nocito -  [GitHub](https://github.com/danielito76)
 - Adesola Oni-Shogbonyo - [GitHub](https://github.com/Iamshola)
 - Michael G. Laird - [GitHub](https://github.com/MGL1994)
@@ -17,23 +17,21 @@
 
 ## Overview
 Date-a-Base is a virtual community where everyone can find and share advices about beautiful and funny locations in London and surroundings, suitable for a dating. The type of locations meet a wide range of preferences which can be filtered depending on the expectations.
-Launch on [Heroku](https://datingexp.herokuapp.com/#/). Check out the GitHub Repo.
+Launch on [Heroku](https://datingexp.herokuapp.com/#/). Check out the [GitHub Repo](https://github.com/Iamshola/Project3)
 
 ## Project Brief
 
 ### The brief requirements were:
-
 * **Build a full-stack application** by making your own backend and your own front-end
 * **Use an Express API** to serve your data from a Mongo database
 * **Consume your API with a separate front-end** built with React
 * **Be a complete product** which most likely means multiple relationships and CRUD functionality for at least a couple of models
 * **Implement thoughtful user stories/wireframes** that are significant enough to help you know which features are core MVP and which you can cut
-* **Have a visually impressive design** to kick your portfolio up a notch and have something to wow future clients & employers. **ALLOW** time for this.
-* **Be deployed online** so it's publicly accessible.
+* **Have a visually impressive design**
 * **Have automated tests** for _at least_ one RESTful resource on the back-end. Improve your employability by demonstrating a good understanding of testing principals.
 * A **working app** hosted on the internet
-​
-## Project Execution
+
+## Process
 ​
 We spend the first day exploring ideas and throughly planning our project. This included:
 
@@ -45,10 +43,6 @@ We spend the first day exploring ideas and throughly planning our project. This 
 #### Trello board
 ![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/43203736/64982277-b2aeef80-d8b5-11e9-8934-8f65b83db216.gif)
 
-
-### Allocation of responsibilities
-​
-Our daily routine involved a morning brief and an end of day summary.
 ​
 ### Languages and Technologies Used:
 * HTML5
@@ -76,48 +70,103 @@ Our daily routine involved a morning brief and an end of day summary.
 
 > **All Features:**
 
-  - View all locations
+  - Register an account
+  - View all locations in  a list view and map view
   - Filter through an index of locations based on date number, type of dating exp and budget.
-  - Filter locations in map view
-
+  - Read About, Contact and Terms and Conditions
 
 > **Registered Users can:**
 
   - Add more workspaces
+  - Update entered workspaces
+  - Log in and out
+  - View other users profiles
+  - Make and delete their comments
+  - Like and Dislike locations
   - Create a user profile and update their profile
 
-
 ​
-## Approach Taken
-### Navbar
-Wanted logged in user avatar to display, involved storing the information in local storage, then retrieving the image url.
-FileStack
-Wanted a smooth, easy way for users to upload images, rather than having to post any pictures online manually before able to do so. Found filestack online and used the documentation + other examples on github to implement. Makes it much easier as our site relies heavily on use input.
+## Wins and Blockers
+#### Wins
 
-### FIlters
+## FileStack
+Date-a-base is a location based site and images are a core part of our site. We decided that we would prefer to use FileStack as an image uploader rather than just using image urls. It looks neater and uploading the image to the page was an extra win. This was achieved by re setting the formData state with the uploaded image.
+
+
+```JavaScript
+<ReactFilestack
+  mode="transform"
+  apikey={fileloaderKey}
+  buttonText="Upload Photo"
+  buttonClass="button"
+  className="upload-image"
+  options={options}
+  onSuccess={(result) => this.handleUploadImages(result)}
+  preload={true}
+/>
+{this.state.formData.image && <img src={this.state.formData.image} />}
+```
+
+
+### Navbar
+As a team, we wanted our navbar to be visually appealing and have common features such as updating navbars as well as routing. In order to update our users avatar, we took advantage of storing information in local storage and then retrieving the image url.
+
+```JavaScript
+  <div className="dropdown-menu" id="dropdown-menu" role="menu">
+    <div className="dropdown-content">
+      <Link to={`/profiles/${Auth.getUser()._id}`} className="dropdown-item">
+      My Profile
+      </Link>
+      <a className="dropdown-item"  onClick={this.logout}>
+      Logout
+      </a>
+    </div>
+  </div>
+```
+
+``` JavaScript
+static getUser() {
+  return JSON.parse(localStorage.getItem('user'))
+}
+```
+
+
+### Filters
 As our site is about helping users make decisions, we wanted to make filters a big component - hence their placement on the landing page. Aside from using React-Select to format the filter dropdowns, the logic involved getting the data from the dropdowns, storing it in state, then passing this over to the locations index page so that it shows a pre-filtered list of locations. Else the user can go straight to the index page.
+
+``` JavaScript
+  <div className="field">
+    <label className="label has-text-left">Budget</label>
+    <Select
+      name="cost"
+      className="filter"
+      options={budgetOptions}
+      defaultValue={budgetOptions[0]}
+      onChange={selected => this.handleFilter(selected, 'cost')}
+      value={budgetOptions.find(option => option.value === this.state.cost)}
+    />
+  </div>
+```
 
 ### Users
 We wanted to create an index of user profiles, perhaps more useful in future iterations, but for the purpose of searching other like minded users. On this page we didn’t want the logged in user to see their own profile. This involved using a filter function before mapping over the users to display them.
 As part of this, in order to find out more information about the user, we created a page asking for user details after the initial register. We did not make the extra questions required so that we could post the initial register, carry over the form details in state and then combine both form details to update the user.
 We also wanted the user to be able to edit their own profile, which we allowed using a function to only show the edit button on a user own profile.
-Styling
-Based the style off of an old movie theatre style with neon effects. Used text shadow/box shadow to get a neon effect.
-Wanted a transparent fixed top navbar, but also had wanted to use the fade in method on scroll for better UX. Found some guidance online and adapted to our needs.
-Win
-Enjoyed learning more about react, particularly storing things in state/local storage.
-Implementing new technologies - filestack loader + react-select.
-Blocker
-Getting the navbar to stay at the bottom of the screen with no content, without hard coding viewport height as this caused problems on the locations index
 
-### Contact format
+### Styling
+Based the style off of an old movie theatre style with neon effects. Used text shadow/box shadow to get a neon effect.
+
+
+
+### Contact form
 We enabled the Contact Form to send email to a our specific gmail address from the backend.
 
-### About Us
-In the About Us page we used a 3d effect CSS to make the page more interesting
 
-### Terms and Conditions
-The same as About Us and Contacts, Terms and Conditions are in the footer so that accessible everywhere in the website. We decided to display the documentation using a Bulma modal overlay effect implemented with Javascript code.
+### Testing
+
+
+
+## Blocker
 
 ### Future Features
 * Address lookup function consuming a public API
