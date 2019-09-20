@@ -240,7 +240,7 @@ handleSubmit(e) {
 
 > **Week 4**
 
-  Project 1 : Frogger  | [GitHub](https://github.com/Iamshola/project-01) | [GH-Pages](https://iamshola.github.io/project-01/)
+  Project 1 : Frogger  | [GitHub](https://github.com/Iamshola/project-01) | [gh-pages](https://iamshola.github.io/project-01/)
 
 >**Week 5 | Module Two - React**
 
@@ -251,7 +251,7 @@ handleSubmit(e) {
 
 >**Week 6**
 
-  Project 2 : CocktailBored  | [GitHub](https://github.com/Iamshola/Project3) | [GH-Pages](https://iamshola.github.io/Project-2/#/)
+  Project 2 : CocktailBored  | [GitHub](https://github.com/Iamshola/Project3) | [gh-pages](https://iamshola.github.io/Project-2/#/)
 
 >**Week 7-8 | Module Three - Node and Express**
 
