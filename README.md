@@ -107,30 +107,6 @@ Date-a-base is a location based site and images are a core part of our site. We 
 {this.state.formData.image && <img src={this.state.formData.image} />}
 ```
 
-
-#### Navbar
-As a team, we wanted our navbar to be visually appealing and have common features such as updating navbars as well as routing. In order to update our users avatar, we took advantage of storing information in local storage and then retrieving the image url.
-
-```JavaScript
-  <div className="dropdown-menu" id="dropdown-menu" role="menu">
-    <div className="dropdown-content">
-      <Link to={`/profiles/${Auth.getUser()._id}`} className="dropdown-item">
-      My Profile
-      </Link>
-      <a className="dropdown-item"  onClick={this.logout}>
-      Logout
-      </a>
-    </div>
-  </div>
-```
-
-``` JavaScript
-static getUser() {
-  return JSON.parse(localStorage.getItem('user'))
-}
-```
-
-
 #### Filters
 As our site is about helping users make decisions, we wanted to make filters a big component - hence their placement on the landing page. Aside from using React-Select to format the filter dropdowns, the logic involved getting the data from the dropdowns, storing it in state, then passing this over to the locations index page so that it shows a pre-filtered list of locations. Else the user can go straight to the index page.
 
@@ -201,13 +177,57 @@ it('should return an array of objects', done => {
 
 
 
-## Blocker
+## Blockers
+
+#### Navbar
+As a team, we wanted our navbar to be visually appealing and have common features such as updating navbars as well as routing. In order to update our users avatar, we took advantage of storing information in local storage and then retrieving the image url. We had a couple issues with the images not automatically updating unless the user signed in again. We overcome this issue by:
+
+```JavaScript
+  <div className="dropdown-menu" id="dropdown-menu" role="menu">
+    <div className="dropdown-content">
+      <Link to={`/profiles/${Auth.getUser()._id}`} className="dropdown-item">
+      My Profile
+      </Link>
+      <a className="dropdown-item"  onClick={this.logout}>
+      Logout
+      </a>
+    </div>
+  </div>
+```
+
+``` JavaScript
+static getUser() {
+  return JSON.parse(localStorage.getItem('user'))
+}
+```
+#### User Profile
+A blocker we experience was adding additional information to the user profile without requesting this when they signed up. We managed to achieve this by using a profiles endpoint created in the backend and updated the formData.
+
+
+``` JavaScript
+
+handleSubmit(e) {
+  e.preventDefault()
+
+  axios.put(`/api/profiles/${this.props.match.params.id}`, {...this.state.formData}, {
+    headers: { Authorization: `Bearer ${Auth.getToken()}` }
+  })
+    .then(res => {
+      toast.success('User suceessfully updated')
+      Auth.setUser(res.data)
+      this.props.history.push('/profiles/')
+    })
+    .catch(err => this.setState({ errors: err.response.data.errors }))
+
+  }
+
+```
 
 ### Future Features
-* Address lookup function consuming a public API
+* Address lookup function consuming a public API to auto populate address
 * Improving User Experience based on user critic
 
-### Course Curriculum
+## Course Curriculum
   Details of my training and links to more projects whilst at General Assembly -  12 Week Immersive.
 
 > **Week 1-3 | Module One - Fundamentals**
