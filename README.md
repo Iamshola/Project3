@@ -89,7 +89,7 @@ We spend the first day exploring ideas and throughly planning our project. This 
 ## Wins and Blockers
 #### Wins
 
-## FileStack
+#### FileStack
 Date-a-base is a location based site and images are a core part of our site. We decided that we would prefer to use FileStack as an image uploader rather than just using image urls. It looks neater and uploading the image to the page was an extra win. This was achieved by re setting the formData state with the uploaded image.
 
 
@@ -108,7 +108,7 @@ Date-a-base is a location based site and images are a core part of our site. We 
 ```
 
 
-### Navbar
+#### Navbar
 As a team, we wanted our navbar to be visually appealing and have common features such as updating navbars as well as routing. In order to update our users avatar, we took advantage of storing information in local storage and then retrieving the image url.
 
 ```JavaScript
@@ -131,7 +131,7 @@ static getUser() {
 ```
 
 
-### Filters
+#### Filters
 As our site is about helping users make decisions, we wanted to make filters a big component - hence their placement on the landing page. Aside from using React-Select to format the filter dropdowns, the logic involved getting the data from the dropdowns, storing it in state, then passing this over to the locations index page so that it shows a pre-filtered list of locations. Else the user can go straight to the index page.
 
 ``` JavaScript
@@ -148,21 +148,56 @@ As our site is about helping users make decisions, we wanted to make filters a b
   </div>
 ```
 
-### Users
-We wanted to create an index of user profiles, perhaps more useful in future iterations, but for the purpose of searching other like minded users. On this page we didn’t want the logged in user to see their own profile. This involved using a filter function before mapping over the users to display them.
-As part of this, in order to find out more information about the user, we created a page asking for user details after the initial register. We did not make the extra questions required so that we could post the initial register, carry over the form details in state and then combine both form details to update the user.
-We also wanted the user to be able to edit their own profile, which we allowed using a function to only show the edit button on a user own profile.
-
-### Styling
-Based the style off of an old movie theatre style with neon effects. Used text shadow/box shadow to get a neon effect.
+#### Contact form
+We created a contact form using Nodemailer. This was just an added gesture to make our users free to provide us with critics and suggestions! This contact form was linked to a gmail account that was created for this project.
 
 
+``` JavaScript
+const mailer = require('../lib/mailer')
+const { USER } = require('../config/environment')
 
-### Contact form
-We enabled the Contact Form to send email to a our specific gmail address from the backend.
+function emailRoute(req, res, next){
+  const name = req.body.name
+  const email = req.body.email
+  const message = req.body.message
+  const content = `name: ${name} \n email: ${email} \n message: ${message} `
+
+  const mail = {
+    from: name,
+    to: USER,
+    subject: 'New Message from Contact Form',
+    text: content
+  }
+
+  mailer.sendMail(mail, (err) => {
+    if (err) next(err)
+    else res.json({ message: 'Message sent' })
+  })
+}
+
+module.exports = {
+  email: emailRoute
+}
+```
 
 
-### Testing
+![image](https://user-images.githubusercontent.com/43203736/65346273-43e2d680-dbd4-11e9-9306-75de1d002759.png)
+
+
+#### Testing
+As part of our project brief, we implemented test driven development. Once our backend was completed, we conducted our tests using Chai and Mocha to test our various endpoints. Here's and example of a test conducted on our index page:
+
+``` JavaScript
+it('should return an array of objects', done => {
+  api.get('/api/locations')
+    .end((err, res) => {
+      res.body.forEach(location => {
+        expect(location).to.be.an('object')
+      })
+      done()
+    })
+})
+```
 
 
 
