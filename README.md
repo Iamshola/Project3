@@ -1,6 +1,7 @@
 ![ga_cog_large_red_rgb](https://cloud.githubusercontent.com/assets/40461/8183776/469f976e-1432-11e5-8199-6ac91363302b.png) x <img width="106" alt="Screenshot 2019-09-16 at 18 43 20" src="https://user-images.githubusercontent.com/43203736/64980637-20591c80-d8b2-11e9-9ba3-bda6511b8ed2.png">
 
 # Project 3: Date-a-base
+###### View Site Here [Heroku](https://datingexp.herokuapp.com/#/)
 
 ### Installation
 
@@ -14,11 +15,9 @@
 - Michael G. Laird - [GitHub](https://github.com/MGL1994)
 - Francisco Dias - [GitHub](https://github.com/FranciscoFHDias)
 
-https://docs.google.com/presentation/d/1G5LT_msA3wBcIPmo3hW2InK_VVFWx5oaCoR0kxNsa4Y/edit#slide=id.p
-
 ## Overview
 Date-a-Base is a virtual community where everyone can find and share advices about beautiful and funny locations in London and surroundings, suitable for a dating. The type of locations meet a wide range of preferences which can be filtered depending on the expectations.
-Launch on GitHub Pages. Check out the GitHub Repo.
+Launch on [Heroku](https://datingexp.herokuapp.com/#/). Check out the GitHub Repo.
 
 ## Project Brief
 
